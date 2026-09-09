@@ -28,7 +28,7 @@ jobs:
         working-directory: resume-mvps/apps/voice-agent
       - run: npm install && npm test && npm run build
         working-directory: resume-mvps/apps/media-etl
-      - run: pip install pytest && cd resume-mvps && pytest -q services/media_etl/tests
+      - run: pip install pytest && cd resume-mvps && PYTHONPATH=. python -m pytest -q services/media_etl/tests
       - run: |
           mkdir -p public/voice-agent public/media-etl
           cp -r resume-mvps/apps/voice-agent/dist/* public/voice-agent/
