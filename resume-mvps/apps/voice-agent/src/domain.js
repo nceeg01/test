@@ -1,0 +1,5 @@
+export const slots=[{id:"10",label:"10:00 AM – 10:30 AM"},{id:"11",label:"11:00 AM – 11:30 AM"},{id:"13",label:"1:00 PM – 1:30 PM"},{id:"1430",label:"2:30 PM – 3:00 PM"}];
+export function book(existing,customerId,slotId){if(existing.some(x=>x.slotId===slotId))throw new Error("That slot was already booked.");return[...existing,{customerId,slotId,status:"confirmed"}]}
+const knowledge=[{terms:["appointment","schedule","availability"],text:"Appointments use 30-minute windows stored in America/Chicago time."},{terms:["reschedule","different"],text:"Synthetic bookings can be changed by selecting another available slot."}];
+export function retrieve(query){const q=query.toLowerCase();return knowledge.find(x=>x.terms.some(t=>q.includes(t)))?.text??"I do not have evidence for that business question in the synthetic knowledge base."}
+export function matchCustomer(value,customers){const found=customers.filter(x=>x.id===value||x.phone===value);return found.length===1?{state:"matched",customer:found[0]}:{state:found.length?"ambiguous":"none"}}
