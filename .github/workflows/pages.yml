@@ -1,4 +1,4 @@
-name: Deploy resume MVPs
+name: Deploy XCT resume MVPs
 on:
   push:
     branches: [main]
@@ -28,13 +28,13 @@ jobs:
         working-directory: resume-mvps/apps/voice-agent
       - run: npm install && npm test && npm run build
         working-directory: resume-mvps/apps/media-etl
-      - run: pip install pytest && pytest -q resume-mvps/services/media_etl/tests
+      - run: pip install pytest && cd resume-mvps && pytest -q services/media_etl/tests
       - run: |
           mkdir -p public/voice-agent public/media-etl
           cp -r resume-mvps/apps/voice-agent/dist/* public/voice-agent/
           cp -r resume-mvps/apps/media-etl/dist/* public/media-etl/
           cat > public/index.html <<'HTML'
-          <!doctype html><title>Yub resume MVPs</title><h1>Yub resume MVPs</h1><p><a href="voice-agent/">Customer Service RAG Agent</a></p><p><a href="media-etl/">Media ETL Pipeline</a></p>
+          <!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Yubraj resume MVPs</title><body><main><h1>Yubraj Chaulagain — Resume MVPs</h1><p><a href="voice-agent/">Customer Service RAG Agent</a></p><p><a href="media-etl/">Media ETL Pipeline</a></p></main></body></html>
           HTML
       - uses: actions/configure-pages@v5
         with:
